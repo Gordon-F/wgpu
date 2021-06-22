@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [master, staging]
+    branches: [master, staging, ci_cache]
     tags: [v0.*]
   pull_request:
     branches-ignore: [staging.tmp]
@@ -100,6 +100,7 @@ jobs:
             additional_player_features:
     steps:
       - uses: actions/checkout@v2
+      - uses: Swatinem/rust-cache@v1
       - if: matrix.channel == 'nightly'
         name: Install latest nightly
         uses: actions-rs/toolchain@v1
